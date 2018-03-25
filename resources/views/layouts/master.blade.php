@@ -3,14 +3,14 @@
 <head>
     <title>@yield('title', 'p3')</title>
     <meta charset='utf-8'>
-    <link href='/css/p3.css' type='text/css' rel='stylesheet'>
+    <link href='/css/billsplitter.css' type='text/css' rel='stylesheet'>
 
     @stack('head')
 </head>
 <body>
 
 <header>
-    <a href='/'><img src='/images/billsplitter.png' id='logo' alt='Bill Splitter Logo'></a>
+    <a href='/'><img src='/images/billsplitterlogo.jpg' id='logo' alt='Bill Splitter Logo'></a>
 </header>
 
 <section>
