@@ -6,13 +6,26 @@ use Illuminate\Http\Request;
 
 class BillController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('bills.index');
-    }
+        $tabTotal = $request->input('tabTotal', null);
+        $splitNum = $request ->input('splitNum', null);
+        $serviceLevel = $request ->input('serviceLevel', null);
+        $roundUp = $request ->input('roundUp', null);
+        $total = 0;
+        if ($roundUp && $tabTotal && $splitNum && $serviceLevel) {
+            $total = number_format((float)(ceil(($tabTotal + ($tabTotal * $serviceLevel)) / $splitNum)), 2, '.', '');
+        }
 
-    public function show($total) {
-        return view('bills.show')->with(['total' => $total]);
+        elseif ($tabTotal && $splitNum && $serviceLevel) {
+            $total = number_format(round((($tabTotal + ($tabTotal * $serviceLevel)) / $splitNum), 2), 2, '.', '');
+        }
+        return view('bills.index')->with(['tabTotal' => $tabTotal,
+                                                'splitNum' => $splitNum,
+                                                'serviceLevel' => $serviceLevel,
+                                                'roundUp' => $roundUp,
+                                                'total' => $total,
+        ]);
     }
 
 }

@@ -5,3 +5,14 @@
 h1 {
     font-family: "Helvetica", sans-serif;
 }
+
+label {
+    display:block;
+    position:relative;
+    padding-left:120px;
+}
+
+
+ul {
+    list-style-type: none;
+}

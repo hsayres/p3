@@ -1,7 +1,14 @@
 <?php
 
 return [
-
+    'possibleServiceLevels' => [
+    '.0' => 'Horrendous (0% tip)',
+    '.10' => 'Bad (10% tip)',
+    '.15' => 'Okay (15% tip)',
+    '.18' => 'Good (18% tip)',
+    '.20' => 'Great (20% tip)',
+    '.25' => 'Spectacular (25% tip)',
+],
     /*
     |--------------------------------------------------------------------------
     | Application Name
