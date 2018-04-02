@@ -11,7 +11,7 @@
 <body>
 
 <header>
-    <a href='/'><img src='/images/billsplitterlogo.jpg' id='logo' alt='Bill Splitter Logo'></a>
+    @include('modules.nav')
 </header>
 
 <section>

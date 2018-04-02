@@ -1,43 +1,47 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1">Bill Splitter</h1>
+    <h1>{{config('app.name')}}</h1>
 
     <form method='GET' action='/bills'>
     <ul>
         <li><label>How much was the tab?
             <span>$</span>
-            <input type='number' name='tabTotal' min='0' step='.01' >
-            <span> *required </span>
+            <input type='number' name='tabTotal' min='0' step='.01' value='{{ $tabTotal or old('tabTotal') }}' >
+            <span class='required'> *required </span>
+             @include('modules.error-field', ['field' => 'tabTotal'])
         </label></li>
         <li><label >Split how many ways?
-            <input type='number' name='splitNum' min='1'>
-            <span > *required </span>
+            <input type='number' name='splitNum' min='1' value='{{ $splitNum or old('splitNum') }}'>
+            <span class='required'> *required </span>
+             @include('modules.error-field', ['field' => 'splitNum'])
         </label></li>
         <li><label >How was the service?
-            <select name='serviceLevel' id='serviceLevel'>
-                <option>Select an option</option>
+            <select name='serviceLevel' id='serviceLevel' >
+                <option value='100'>Select an option</option>
                 @foreach(config('app.possibleServiceLevels') as $serviceLevel => $description)
-                <option value='{{ $serviceLevel  }}'> {{ $description }} </option>
+
+
+                    <option value="{{ $serviceLevel }}"  @if( (isset($_GET['serviceLevel']) && $_GET['serviceLevel'] ==  $serviceLevel) or (Request::old('serviceLevel') == $serviceLevel))) selected='selected' @endif> {{ $description }} </option>
                 @endforeach
             </select>
-            <span> *required </span>
+            <span class='required'> *required </span>
+            @include('modules.error-field', ['field' => 'serviceLevel'])
         </label></li>
         <li><label >Round up?:
-            <input type='checkbox' name='roundUp' id='roundUp' value='1'> Yes
+            <input type='checkbox' name='roundUp' id='roundUp' value='1' @if (isset($_GET['roundUp']) or (old('roundUp'))) checked="checked" @endif> Yes
         </label></li>
 
         <li><label>
-            <input type='submit' value='Calculate'>
+            <input type='submit' value='Calculate' name='submitInput' class='btn-primary inputButton'>
         </label></li>
         <li><label>
-            <input type='button' value='Clear input' onClick='window.location.href=window.location.href'>
+            <input type='button' value='Clear input' onclick="window.location.href='/bills'" class='btn-danger inputButton'>
         </label></li>
     </ul>
     </form>
 
     @if($tabTotal)
-        <h2>Tab total is {{ $tabTotal }} for {{ $splitNum }} people and the tip is {{ $serviceLevel }} of the bill</h2>
-        <h2>And everyone pays {{ $total }} </h2>
+        <p class='bg-success'>Everyone owes $<?= $total ?> each</p>
     @endif
 @endsection

@@ -9,6 +9,12 @@ return [
     '.20' => 'Great (20% tip)',
     '.25' => 'Spectacular (25% tip)',
 ],
+
+    'nav' => [
+        '/' => 'Home',
+        '/bills' => 'Bill Splitter',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
