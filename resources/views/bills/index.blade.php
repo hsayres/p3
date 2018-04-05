@@ -22,14 +22,14 @@
                 @foreach(config('app.possibleServiceLevels') as $serviceLevel => $description)
 
 
-                    <option value="{{ $serviceLevel }}"  @if( (isset($_GET['serviceLevel']) && $_GET['serviceLevel'] ==  $serviceLevel) or (Request::old('serviceLevel') == $serviceLevel))) selected='selected' @endif> {{ $description }} </option>
+                    <option value="{{ $serviceLevel }}"  @if( (Request::has('serviceLevel') && Request::input('serviceLevel') ==  $serviceLevel) or (Request::old('serviceLevel') == $serviceLevel))) selected='selected' @endif> {{ $description }} </option>
                 @endforeach
             </select>
             <span class='required'> *required </span>
             @include('modules.error-field', ['field' => 'serviceLevel'])
         </label></li>
         <li><label >Round up?:
-            <input type='checkbox' name='roundUp' id='roundUp' value='1' @if (isset($_GET['roundUp']) or (old('roundUp'))) checked="checked" @endif> Yes
+            <input type='checkbox' name='roundUp' id='roundUp' value='1' @if (Request::has('roundUp')) or (old('roundUp'))) checked="checked" @endif> Yes
         </label></li>
 
         <li><label>
